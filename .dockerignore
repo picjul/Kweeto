@@ -1,0 +1,20 @@
+# keep the build context small and private
+.git
+.github
+.vscode
+.claude
+docs
+assets
+scripts
+**/__pycache__
+**/*.pyc
+**/.pytest_cache
+backend/.venv
+backend/data
+backend/data-fake
+backend/bench
+backend/tests
+frontend/node_modules
+frontend/.next
+frontend/.env.local
+frontend/tsconfig.tsbuildinfo

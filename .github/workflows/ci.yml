@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    name: Backend (tests + lint, without PyTorch)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: backend/.python-version
+          cache: pip
+      # the light install (as `scripts/setup.sh --light`): fake embedder + simple segmenter, no model download;
+      # the tests that need real models are skipped
+      - run: pip install fastapi "uvicorn[standard]" sqlalchemy pillow numpy python-multipart faiss-cpu -r requirements-dev.txt
+      - run: ruff check .
+      - run: python -m pytest -q
+        env:
+          KWEETO_EMBEDDER: pixels
+
+  frontend:
+    name: Frontend (types + build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci --no-fund --no-audit
+      - run: npx tsc --noEmit
+      - run: npm run build

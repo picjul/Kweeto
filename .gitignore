@@ -1,0 +1,25 @@
+# Private product documentation: never publish (the public docs are in docs/)
+documentation/
+
+# Local-only marketing pictures
+linkedin/
+
+# Demo GIF / README pictures / promo video tooling: local only, not part of the repository
+scripts/demo/
+
+# Python
+backend/.venv/
+backend/data/
+backend/data-fake/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Node
+frontend/node_modules/
+frontend/.next/
+frontend/.next-*/
+frontend/.env.local
+frontend/tsconfig.tsbuildinfo
+
+.DS_Store

@@ -1,0 +1,8 @@
+# Lint: real errors only (unused or undefined names, syntax), plus a few bug-prone patterns.
+# FastAPI's `Depends(...)` / `File(...)` defaults are the framework's idiom, so B008 stays off.
+target-version = "py311"
+line-length = 130
+extend-exclude = ["data", "data-fake", ".venv"]
+
+[lint]
+select = ["F", "E9", "B006", "B023", "B904"]

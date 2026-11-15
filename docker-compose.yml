@@ -1,0 +1,27 @@
+# Kweeto: `docker compose up -d`, then open http://localhost:3000
+# Light image without PyTorch (test engine only): KWEETO_TORCH=none docker compose up -d --build
+services:
+  kweeto:
+    build:
+      context: .
+      args:
+        TORCH: ${KWEETO_TORCH:-cpu}
+    image: kweeto:${KWEETO_TORCH:-cpu}
+    container_name: kweeto
+    ports:
+      # localhost only: Kweeto has no authentication (see SECURITY.md). To reach it from another machine, put an
+      # authenticating reverse proxy in front instead of publishing the port on every interface.
+      - "127.0.0.1:${KWEETO_PORT:-3000}:3000"
+    volumes:
+      - kweeto-data:/data      # projects, images, exports
+      - kweeto-models:/models  # downloaded vision models (Hugging Face cache)
+    environment:
+      # KWEETO_PROFILE: light            # engine profile on first start: light | balanced | accurate
+      # KWEETO_TRUSTSTORE: "1"           # behind a TLS-intercepting proxy
+      # HTTPS_PROXY: http://proxy:8080
+      KWEETO_DATA_DIR: /data
+    restart: unless-stopped
+
+volumes:
+  kweeto-data:
+  kweeto-models:

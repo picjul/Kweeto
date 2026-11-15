@@ -1,0 +1,8 @@
+Kweeto
+Copyright 2026 The Kweeto authors
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Kweeto downloads pretrained models (DINOv2, SigLIP, SAM, SlimSAM, SAM 2.1, LibreYOLO weights) at run time; they
+are not part of this repository and keep their own licenses, listed in README.md ("Model and dependency licenses").
+The Plus Jakarta Sans font is used under the SIL Open Font License 1.1.

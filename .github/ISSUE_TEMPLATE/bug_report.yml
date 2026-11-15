@@ -1,0 +1,32 @@
+name: Bug report
+description: Something does not work as it should
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead. Screenshots help.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Open a project with ...\n2. ..."
+  - type: input
+    id: engine
+    attributes:
+      label: Engine
+      description: From the Engine page (profile, runtime / execution provider, device), e.g. "light, ONNX DirectML, GPU".
+  - type: input
+    id: version
+    attributes:
+      label: Version and setup
+      description: Kweeto version (bottom of the Engine page), OS, and Docker or local install.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Backend console output around the error, if any.
+      render: text

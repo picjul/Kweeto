@@ -1,0 +1,21 @@
+fastapi>=0.115
+uvicorn[standard]>=0.30
+sqlalchemy>=2.0.30
+pillow>=10.4
+numpy>=1.26
+python-multipart>=0.0.9
+faiss-cpu>=1.8
+torch>=2.2
+torchvision>=0.17      # SAM 2 image processor (balanced profile)
+transformers>=4.56     # Sam2Model (SAM 2.1), Dinov2Model, SamModel
+truststore>=0.9
+# ONNX Runtime: the standard inference runtime (see app/runtime.py). One package per hardware, they exclude
+# each other: onnxruntime-directml (Windows, any DirectX 12 GPU), onnxruntime (CPU; CoreML on macOS),
+# onnxruntime-gpu (NVIDIA CUDA / TensorRT), onnxruntime-openvino (Intel). To use another one, uninstall the
+# default below and install it instead.
+onnx>=1.17             # graph export from the PyTorch weights (once per model)
+onnxscript>=0.2
+onnxruntime-directml>=1.20; sys_platform == "win32"
+onnxruntime>=1.20; sys_platform != "win32"
+# Ad-hoc detector training (Training page): LibreYOLO, MIT; pretrained YOLOv9 (MIT) / YOLOX (Apache-2.0) weights
+libreyolo>=1.7.4
